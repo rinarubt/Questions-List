@@ -10,24 +10,31 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - run: npm install
+      - name: Install
+        run: npm install
 
-      - run: npm run build
+      - name: Build
+        run: npm run build
 
-      - uses: actions/configure-pages@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-      - uses: actions/upload-pages-artifact@v2
+      - name: Upload
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
 
-      - uses: actions/deploy-pages@v2
+      - name: Deploy
+        uses: actions/deploy-pages@v4
