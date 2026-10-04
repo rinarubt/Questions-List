@@ -1,0 +1,12 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24.000000" height="24.000000" fill="none" customFrame="#000000">
+	<defs>
+		<clipPath id="clipPath_0">
+			<rect width="24.000000" height="24.000000" x="0.000000" y="0.000000" fill="rgb(255,255,255)" />
+		</clipPath>
+	</defs>
+	<rect id="accordeon" width="24.000000" height="24.000000" x="0.000000" y="0.000000" fill="rgb(255,255,255)" fill-opacity="0" />
+	<g id="Chevrone_Down" clip-path="url(#clipPath_0)" customFrame="url(#clipPath_0)">
+		<rect id="Chevrone_Down" width="24.000000" height="24.000000" x="0.000000" y="0.000000" fill="rgb(255,255,255)" fill-opacity="0" />
+		<path id="Vector" d="M6.58926 8.41074C6.26382 8.08531 5.73618 8.08531 5.41074 8.41074C5.08531 8.73618 5.08531 9.26382 5.41074 9.58926L6.58926 8.41074ZM12 15L11.4107 15.5893C11.7362 15.9147 12.2638 15.9147 12.5893 15.5893L12 15ZM18.5893 9.58926C18.9147 9.26382 18.9147 8.73618 18.5893 8.41074C18.2638 8.08531 17.7362 8.08531 17.4107 8.41074L18.5893 9.58926ZM5.41074 9.58926L11.4107 15.5893L12.5893 14.4107L6.58926 8.41074L5.41074 9.58926ZM12.5893 15.5893L18.5893 9.58926L17.4107 8.41074L11.4107 14.4107L12.5893 15.5893Z" fill-rule="nonzero" stroke="rgb(106,11,255)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.666667" />
+	</g>
+</svg>

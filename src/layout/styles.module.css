@@ -1,0 +1,29 @@
+.layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    grid-template-rows: 72px 1fr auto;
+
+    grid-template-areas:
+        'sidebar header'
+        'sidebar content'
+        'footer footer';
+    height: auto;
+
+}
+
+.content {
+    grid-area: content;
+    padding: 20px;
+    position: relative;
+    
+}
+
+@media (max-width: 1024px) {
+    .layout {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'header'
+            'content'
+            'footer';
+    }
+}

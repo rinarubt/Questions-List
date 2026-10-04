@@ -1,0 +1,39 @@
+.inputSearch {
+    width: 100%;
+    height: 48px;
+    padding-left: 45px;
+    padding-right: 24px;
+    border: 1px solid var(--Black-50);
+    background: var(--White-900);
+    border-radius: 68px;
+    font-family: "Manrope";
+    font-size: 16px;
+    font-weight: 400;
+    font-size: 16px;
+    outline: none;
+}
+
+.inputSearch::placeholder {
+    color: var(--Black-300);
+}
+
+.inputSearch:focus {
+    outline: none;
+    border: 1px solid var(--Purple-700);
+}
+
+.searchWrapper {
+    position: relative;
+    width: 312px;
+}
+
+.searchIcon {
+    display: block;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+}

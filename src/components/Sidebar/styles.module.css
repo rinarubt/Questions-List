@@ -1,0 +1,141 @@
+.sidebar {
+    grid-area: sidebar;
+    background: var(--white);
+    font-size: 18px;
+    align-self: start;
+    margin-bottom: 80px;
+}
+
+.sidebarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    height: 72px;
+    border-bottom: 1px solid var(--Black-50);
+}
+
+.sidebarMenu {
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 500;
+
+}
+
+.sidebarMenu ul {
+    list-style: none;
+}
+
+.mainMenu {
+    padding: 20px;
+}
+
+.mainMenuInner {
+    border-bottom: 0.5px solid var(--Black-100);
+    margin-bottom: 8px;
+}
+
+.mainMenuList {
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 8px;
+}
+
+.mainMenuItem {
+    color: var(--Black-700);
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+}
+
+.mainMenuItemActive {
+    color: var(--Purple-700);
+    border-radius: 12px;
+    background: rgba(248, 248, 248, 1);
+}
+
+.imgItem {
+    width: 24px;
+    height: 24px;
+}
+
+.submenu {
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: var(--Black-10);
+}
+
+.submenuTitleInner {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.submenuTitle {
+    margin: 0;
+    color: var(--Black-700);
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.submenuItems {
+    margin-top: 12px;
+    padding: 0;
+}
+
+.submenuItem {
+    border-radius: 12px;
+}
+
+.submenuItemLink {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 12px 16px;
+    color: var(--Black-900);
+}
+
+.submenuItemActive {
+    background: var(--Purple-100);
+}
+
+.submenuButtons {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.helpButton,
+.logOutButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 48px;
+    border-radius: 12px;
+    font-size: 18px;
+}
+
+.helpButton {
+    color: var(--White-900);
+    background: var(--Purple-700);
+    margin-bottom: 10px;
+}
+
+.logOutButton {
+    border: 1px solid var(--Red-600);
+    color: var(--Red-600);
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        display: none;
+    }
+}

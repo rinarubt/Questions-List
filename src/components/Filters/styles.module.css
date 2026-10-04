@@ -1,0 +1,83 @@
+.filters {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    min-width: 360px;
+    max-width: 360px;
+    min-height: auto;
+    border-radius: 24px;
+    background: var(--white);
+    padding: 24px;
+    gap: 10px;
+}
+
+.filterButtonsTitle {
+    color: var(--Black-700);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.categoriesButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    overflow-y: auto;
+    max-height: 250px;
+}
+
+
+.moreBtn {
+    margin-top: 8px;
+    color: var(--Purple-700);
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 19px;
+    font-family: "Manrope";
+}
+
+.filterGroup button {
+    margin-right: 8px;
+    margin-bottom: 8px;
+
+}
+
+.categoriesButtons::-webkit-scrollbar {
+    width: 4px;
+    height: 8px;
+}
+
+.categoriesButtons::-webkit-scrollbar-track {
+    background: none
+}
+
+.categoriesButtons::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background: var(--Purple-700);
+}
+
+.closeFilters {
+    display: none
+}
+
+
+@media (max-width: 1024px) {
+    .filters {
+        border-radius: 0px;
+        box-shadow: 0px 4px 10px 0px rgba(106, 99, 118, 0.1);
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: none;
+        z-index: 100;
+    }
+
+    .open {
+        display: flex;
+    }
+
+    .closeFilters {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
