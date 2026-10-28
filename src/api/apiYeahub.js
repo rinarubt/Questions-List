@@ -2,26 +2,46 @@ import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_YEA_API_URL
 
-export const getQuestions = async (params = {}) => {
-    try {
-        const response = await axios.get(`${BASE_URL}/questions/public-questions`, {
-            params
-        })
-        return response.data
-    } catch (error) {
-        console.log(error)
-        throw error
-    }
+export const getQuestions = async (params = {}, signal) => {
+    const response = await axios.get(
+        `${BASE_URL}/questions/public-questions`,
+        {
+            params,
+            signal,
+        }
+    )
+
+    return response.data
 }
+
 
 export const getSkills = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}/skills`, {
-            params: {limit : 44}
+        const firstResponse = await axios.get(`${BASE_URL}/skills`, {
+            params: { page: 1 }
         })
-        return response.data
+
+        const firstData = firstResponse.data
+        const allSkills = [...firstData.data]
+
+        const totalPages = Math.ceil(
+            firstData.total / firstData.data.length
+        )
+
+        for (let page = 2; page <= totalPages; page++) {
+            const response = await axios.get(`${BASE_URL}/skills`, {
+                params: { page }
+            })
+
+            allSkills.push(...response.data.data)
+        }
+
+        return {
+            ...firstData,
+            data: allSkills
+        }
     } catch (error) {
-        console.log(error)
+        console.error('Ошибка загрузки категорий:', error)
         throw error
     }
 }

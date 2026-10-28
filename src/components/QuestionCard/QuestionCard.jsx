@@ -26,25 +26,26 @@ function QuestionCard({ question, isOpen, onToggle }) {
             </div>
 
             <div className={`${styles.cardContent} ${isOpen ? styles.show : ''}`}>
-                <div className={styles.cardFilters}>
-                    <div className={styles.cardFiltersInner}>
-                        <InfoBadge label={'Рейтинг:'} value={rate} />
-                        <InfoBadge label={'Сложность:'} value={complexity} />
+                <div>
+                    <div className={styles.cardFilters}>
+                        <div className={styles.cardFiltersInner}>
+                            <InfoBadge label={'Рейтинг:'} value={rate} />
+                            <InfoBadge label={'Сложность:'} value={complexity} />
+                        </div>
+
+                        <button className={styles.actionsButton}>
+                            <img src={action} alt="" />
+                        </button>
                     </div>
 
-                    <button
-                        className={styles.actionsButton}
-                    >
-                        <img src={action} alt="" />
-                    </button>
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(shortAnswer)
+                        }}
+                    />
                 </div>
-
-                <div
-                    dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(shortAnswer)
-                    }}
-                />
             </div>
+
         </div>
     )
 }

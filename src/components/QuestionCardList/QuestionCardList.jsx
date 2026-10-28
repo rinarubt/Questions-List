@@ -3,7 +3,7 @@ import { toggleValue } from "../../utils/toggleValue";
 
 import QuestionCard from "../QuestionCard/QuestionCard";
 import filtersButton from "../../assets/filtersButton.svg";
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 
 function QuestionCardList({ questions, onOpenFilters }) {
     const [openIds, setOpenIds] = useState([])
@@ -11,7 +11,13 @@ function QuestionCardList({ questions, onOpenFilters }) {
     const openSet = new Set(openIds)
 
     useEffect(() => {
-        setOpenIds([])
+        const currentIds = new Set(
+            (questions ?? []).map(question => question.id)
+        )
+
+        setOpenIds(prev =>
+            prev.filter(id => currentIds.has(id))
+        )
     }, [questions])
 
     const toggleCard = useCallback((id) => {
@@ -22,23 +28,24 @@ function QuestionCardList({ questions, onOpenFilters }) {
         <>
             <div className={styles.questionCardListHeader}>
                 <h2 className={styles.title}>Вопросы</h2>
-                <button className={styles.filtersButton} onClick={onOpenFilters}>
-                    <img src={filtersButton} alt="" />
 
+                <button
+                    className={styles.filtersButton}
+                    onClick={onOpenFilters}
+                >
+                    <img src={filtersButton} alt="" />
                 </button>
             </div>
 
-
             {questions?.map(question => (
-                    <QuestionCard
-                        key={question.id}
-                        question={question}
-                        isOpen={openSet.has(question.id)}
-                        onToggle={() => toggleCard(question.id)}
-                    />
-                ))}
+                <QuestionCard
+                    key={question.id}
+                    question={question}
+                    isOpen={openSet.has(question.id)}
+                    onToggle={() => toggleCard(question.id)}
+                />
+            ))}
         </>
-
     )
 }
 

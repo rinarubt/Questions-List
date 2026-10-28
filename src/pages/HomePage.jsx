@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 import { useDebounce } from "../hooks/useDebounce";
 import { useQuestions } from "../hooks/useQuestions";
@@ -12,7 +12,6 @@ import { toggleValue } from "../utils/toggleValue";
 
 import QuestionCardList from "../components/QuestionCardList/QuestionCardList";
 import Filters from "../components/Filters/Filters";
-import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
 import EmptyState from "../components/EmptyState/EmptyState";
 import Pagination from "../components/Pagination/Pagination";
 
@@ -27,6 +26,10 @@ function HomePage() {
     const [debouncedSearch, setDebouncedSearchImmediate] = useDebounce(searchQuery, 400)
 
     const [isFiltersOpen, setIsFiltersOpen] = useState(false)
+
+    const handleCloseFilters = useCallback(() => {
+        setIsFiltersOpen(false);
+    }, [])
 
     const skills = useSkills()
 
@@ -77,8 +80,6 @@ function HomePage() {
 
     return (
         <>
-            <Breadcrumbs />
-
             <div className={styles.maincontent}>
                 <section className={styles.inner}>
                     {isEmpty ? (
@@ -109,7 +110,7 @@ function HomePage() {
                     toggleComplexity={toggleComplexity}
                     categories={skills}
                     isOpen={isFiltersOpen}
-                    onClose={() => setIsFiltersOpen(false)}
+                    onClose={handleCloseFilters}
                 />
             </div>
         </>

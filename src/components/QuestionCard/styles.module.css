@@ -42,15 +42,21 @@
     transform: rotate(180deg);
 }
 
+
 .cardContent {
-    max-height: 0;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+}
+
+.cardContent>div {
+    min-height: 0;
     overflow: hidden;
-    transition: 0.3s;
 }
 
 .show {
+    grid-template-rows: 1fr;
     margin-top: 24px;
-    max-height: 600px;
 }
 
 .cardFilters {
@@ -62,7 +68,3 @@
     display: flex;
     gap: 40px;
 }
-
-
-
-

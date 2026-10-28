@@ -11,10 +11,11 @@ export function useClickOutside(ref, handler, isActive = true) {
 
             handler(event)
         }
-        document.addEventListener('pointerdown', listener)
+
+        document.addEventListener("pointerdown", listener)
 
         return () => {
-            document.addEventListener('pointerdown', listener)
+            document.removeEventListener("pointerdown", listener)
         }
     }, [ref, handler, isActive])
 }
