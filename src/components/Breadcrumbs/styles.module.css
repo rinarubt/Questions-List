@@ -23,3 +23,22 @@
 .active {
     color: var(--Purple-700);
 }
+
+
+.iconMask {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    -webkit-mask-image: url('../../assets/BreadcrumbIcon.svg');
+    mask-image: url('../../assets/BreadcrumbIcon.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-color: var(--Black-700); 
+    transition: background-color 0.3s;
+}
+
+.iconMaskActive {
+    background-color: var(--Purple-700); 
+}

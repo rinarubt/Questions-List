@@ -1,16 +1,16 @@
 import { useState, useRef } from "react";
 
-import { useClickOutside } from "../../hooks/useClickOutside";
+import { useClickOutside } from "../../../../hooks/useClickOutside";
 
-import { VISIBLE_LIMIT } from "../../constants/constants";
-import { COMPLEXITY_OPTIONS } from "../../constants/constants";
-import { RATING_OPTIONS } from "../../constants/constants";
-import { STATUS_OPTIONS } from "../../constants/constants";
+import { VISIBLE_LIMIT } from "../../../../constants/constants";
+import { COMPLEXITY_OPTIONS } from "../../../../constants/constants";
+import { RATING_OPTIONS } from "../../../../constants/constants";
+import { STATUS_OPTIONS } from "../../../../constants/constants";
 
 import Search from "../Search/Search";
 import FilterButton from "../FilterButton/FilterButton";
 
-import closeFiltersButton from "../../assets/closeFilters.svg";
+import closeFiltersButton from "../../../../assets/closeFilters.svg";
 
 import styles from './styles.module.css'
 

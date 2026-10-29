@@ -1,4 +1,4 @@
-import searchIcon from "../../assets/searchIcon.svg";
+import searchIcon from "../../../../assets/searchIcon.svg";
 import styles from './styles.module.css'
 
 function Search({ value, onChange }) {

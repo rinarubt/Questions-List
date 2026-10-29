@@ -1,19 +1,19 @@
 import { useState, useCallback } from "react";
 
-import { useDebounce } from "../hooks/useDebounce";
-import { useQuestions } from "../hooks/useQuestions";
-import { useSkills } from "../hooks/useSkills";
+import { useDebounce } from "../../hooks/useDebounce";
+import { useQuestions } from "../../hooks/useQuestions";
+import { useSkills } from "../../hooks/useSkills";
 
-import { ITEMS_PER_PAGE } from "../constants/constants";
-import { EMPTY_FILTERS } from "../constants/constants";
+import { ITEMS_PER_PAGE } from "../../constants/constants";
+import { EMPTY_FILTERS } from "../../constants/constants";
 
-import { toggleRange } from "../utils/toggleRange";
-import { toggleValue } from "../utils/toggleValue";
+import { toggleRange } from "../../utils/toggleRange";
+import { toggleValue } from "../../utils/toggleValue";
 
-import QuestionCardList from "../components/QuestionCardList/QuestionCardList";
-import Filters from "../components/Filters/Filters";
-import EmptyState from "../components/EmptyState/EmptyState";
-import Pagination from "../components/Pagination/Pagination";
+import QuestionCardList from "./components/QuestionCardList/QuestionCardList";
+import Filters from "./components/Filters/Filters";
+import EmptyState from "./components/EmptyState/EmptyState";
+import Pagination from "./components/Pagination/Pagination";
 
 import styles from './styles.module.css'
 

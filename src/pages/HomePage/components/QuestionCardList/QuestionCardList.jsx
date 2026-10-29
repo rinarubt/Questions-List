@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
-import { toggleValue } from "../../utils/toggleValue";
+import { toggleValue } from "../../../../utils/toggleValue";
 
 import QuestionCard from "../QuestionCard/QuestionCard";
-import filtersButton from "../../assets/filtersButton.svg";
+import filtersButton from "../../../../assets/filtersButton.svg";
 import styles from './styles.module.css';
 
 function QuestionCardList({ questions, onOpenFilters }) {

@@ -1,8 +1,8 @@
 import DOMPurify from "dompurify";
 
-import InfoBadge from "../InfoBadge/InfoBadge";
-import accordeon from "../../assets/accordeon.svg";
-import action from "../../assets/action.svg";
+import InfoBadge from "../../../../components/InfoBadge/InfoBadge";
+import accordeon from "../../../../assets/accordeon.svg";
+import action from "../../../../assets/action.svg";
 import styles from './styles.module.css'
 
 

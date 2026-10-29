@@ -1,7 +1,7 @@
-import { getPaginationRange } from "../../utils/getPaginationRange";
+import { getPaginationRange } from "../../../../utils/getPaginationRange";
 
-import arrowLeft from "../../assets/paginationArrowL.svg";
-import arrowRight from "../../assets/paginationArrowR.svg";
+import arrowLeft from "../../../../assets/paginationArrowL.svg";
+import arrowRight from "../../../../assets/paginationArrowR.svg";
 
 import styles from './styles.module.css'
 
