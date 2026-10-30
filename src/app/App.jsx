@@ -6,8 +6,8 @@ function App() {
   return (
     <>
       <Layout>
-      {/* <QuestionDetailsPage /> */}
       <HomePage />
+      {/* <QuestionDetailsPage /> */}
       </Layout>
     </>
   )

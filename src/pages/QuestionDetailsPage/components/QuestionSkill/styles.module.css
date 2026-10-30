@@ -1,0 +1,11 @@
+.skill {
+    padding: 10px 12px;
+    border: 1px solid var(--Purple-700);
+    border-radius: 12px;
+    color: var(--Black-800);
+    font-family: "Manrope";
+    font-size: 16px;
+    font-weight: 500;
+    gap: 8px;
+    width: fit-content;
+}

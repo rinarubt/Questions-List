@@ -1,0 +1,50 @@
+.questionProgress {
+    display: flex;
+    border-radius: 24px;
+    box-shadow: 0px 4px 10px 0px rgba(106, 99, 118, 0.1);
+    background: var(--White-900, rgba(255, 255, 255, 1));
+    padding: 24px;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.title {
+    color: var(--Black-800);
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.progress {
+    color: var(--Black-400);
+    font-size: 12px;
+}
+
+.progressInner {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.progressScaleR1,
+.progressScaleS,
+.progressScaleR2 {
+    background: var(--Green-900, rgba(0, 134, 22, 1));
+    width: 103px;
+}
+
+.progressScaleR1 {
+    height: 8px;
+    border-radius: 30px 0px 0px 30px;
+}
+
+.progressScaleR2 {
+    height: 8px;
+    border-radius: 0px 50px 50px 0px;
+}
+
+.progressScaleS {
+    height: 12px;
+}
+
+

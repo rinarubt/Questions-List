@@ -1,0 +1,26 @@
+.maincontent {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    min-height: 100vh;
+
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: auto;
+}
+
+.aside {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    min-width: 360px;
+    max-width: 360px;
+    min-height: auto;
+    gap: 10px;
+}
