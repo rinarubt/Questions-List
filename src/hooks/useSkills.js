@@ -3,19 +3,31 @@ import { getSkills } from '../api/apiYeahub';
 
 export function useSkills() {
     const [skills, setSkills] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
+        const controller = new AbortController()
 
-        const fetchSkills = async () => {
+        async function fetchSkills() {
             try {
-                const res = await getSkills()
+                const res = await getSkills(controller.signal)
                 setSkills(res.data)
             } catch (error) {
-                console.log(error)
+                if (controller.signal.aborted) return
+
+                setError(error)
+            } finally {
+                if (!controller.signal.aborted) {
+                    setIsLoading(false)
+                }
             }
         }
+
         fetchSkills()
+
+        return () => controller.abort()
     }, [])
 
-    return skills
+    return { skills, isLoading, error }
 }

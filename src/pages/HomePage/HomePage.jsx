@@ -1,4 +1,5 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { useDebounce } from "../../hooks/useDebounce";
 import { useQuestions } from "../../hooks/useQuestions";
@@ -12,68 +13,143 @@ import { toggleValue } from "../../utils/toggleValue";
 
 import QuestionCardList from "./components/QuestionCardList/QuestionCardList";
 import Filters from "./components/Filters/Filters";
-import EmptyState from "./components/EmptyState/EmptyState";
 import Pagination from "./components/Pagination/Pagination";
+import EmptyState from "./components/EmptyState/EmptyState";
+import LoadingState from "../../components/LoadingState/LoadingState";
+import ErrorState from "../../components/ErrorState/ErrorState";
 
 import styles from './styles.module.css'
 
 
 function HomePage() {
-    const [searchQuery, setSearchQuery] = useState('')
-    const [filters, setFilters] = useState(EMPTY_FILTERS)
-    const [currentPage, setCurrentPage] = useState(1)
+    const [searchParams, setSearchParams] = useSearchParams()
 
-    const [debouncedSearch, setDebouncedSearchImmediate] = useDebounce(searchQuery, 400)
+    const currentPage = Math.max(1, Number(searchParams.get('page')) || 1)
+
+    const categoryParam = searchParams.get('category')
+    const ratingParam = searchParams.get('rating')
+    const complexityParam = searchParams.get('complexity')
 
     const [isFiltersOpen, setIsFiltersOpen] = useState(false)
 
-    const handleCloseFilters = useCallback(() => {
-        setIsFiltersOpen(false);
-    }, [])
+    const urlSearch = searchParams.get('search') || ''
 
-    const skills = useSkills()
+    const [debouncedSearch] = useDebounce(urlSearch, 400)
 
-    const { questions, totalPages } = useQuestions({
+    const filters = useMemo(() => ({
+        ...EMPTY_FILTERS,
+
+        category: categoryParam
+            ? categoryParam.split(',').map(Number)
+            : [],
+
+        rating: ratingParam
+            ? ratingParam.split(',').map(Number)
+            : [],
+
+        complexity: (() => {
+            try {
+                return JSON.parse(complexityParam) || []
+            } catch {
+                return []
+            }
+        })()
+    }), [categoryParam, ratingParam, complexityParam])
+
+    const {
+        questions,
+        totalPages,
+        isLoading,
+        error: questionsError
+    } = useQuestions({
         currentPage,
         itemsPerPage: ITEMS_PER_PAGE,
         filters,
         search: debouncedSearch,
     })
 
+    const {
+        skills,
+        isLoading: skillsLoading,
+        error: skillsError
+    } = useSkills()
+
+    const updateParams = (updates) => {
+        setSearchParams(prev => {
+            const params = new URLSearchParams(prev);
+
+            Object.entries(updates).forEach(([key, value]) => {
+                if (value === null || value === '') {
+                    params.delete(key);
+                } else {
+                    params.set(key, String(value));
+                }
+            })
+            return params
+        })
+    }
+
+    const handleCloseFilters = useCallback(() => {
+        setIsFiltersOpen(false);
+    }, [])
+
     const handleSearchChange = (q) => {
-        setSearchQuery(q)
-        setCurrentPage(1)
+        setSearchParams(prev => {
+            const params = new URLSearchParams(prev)
+
+            if (q) {
+                params.set('search', q)
+            } else {
+                params.delete('search')
+            }
+
+            params.set('page', '1')
+
+            return params
+        }, { replace: true })
     }
 
-    const toggleCategory = (c) => {
-        setFilters((prev) => ({
-            ...prev,
-            category: toggleValue(prev.category, c),
-        }))
-        setCurrentPage(1)
-    }
-
-    const toggleRating = (r) => {
-        setFilters((prev) => ({
-            ...prev,
-            rating: toggleValue(prev.rating, r),
-        }))
-        setCurrentPage(1)
-    }
-
-    const toggleComplexity = (d) => {
-        setFilters((prev) => ({
-            ...prev,
-            complexity: toggleRange(prev.complexity, d),
-        }))
-        setCurrentPage(1)
+    const handlePageChange = (page) => {
+        updateParams({ page })
     }
 
     const handleResetFilters = () => {
         setSearchQuery('')
         setDebouncedSearchImmediate('')
-        setFilters({ ...EMPTY_FILTERS })
-        setCurrentPage(1)
+
+        updateParams({
+            page: 1,
+            search: null,
+            category: null,
+            rating: null,
+            complexity: null
+        })
+    }
+
+    const toggleCategory = (c) => {
+        const updated = toggleValue(filters.category, c)
+
+        updateParams({
+            category: updated.join(','),
+            page: 1
+        })
+    }
+
+    const toggleRating = (r) => {
+        const updated = toggleValue(filters.rating, r)
+
+        updateParams({
+            rating: updated.join(','),
+            page: 1
+        })
+    }
+
+    const toggleComplexity = (d) => {
+        const updated = toggleRange(filters.complexity, d)
+        updateParams({
+            complexity: JSON.stringify(updated),
+            page: 1
+        })
     }
 
     const isEmpty = questions.length === 0
@@ -82,7 +158,11 @@ function HomePage() {
         <>
             <div className={styles.maincontent}>
                 <section className={styles.inner}>
-                    {isEmpty ? (
+                    {isLoading ? (
+                        <LoadingState />
+                    ) : questionsError ? (
+                        <ErrorState />
+                    ) : isEmpty ? (
                         <EmptyState onReset={handleResetFilters} />
                     ) : (
                         <>
@@ -94,15 +174,14 @@ function HomePage() {
                             <Pagination
                                 currentPage={currentPage}
                                 totalPages={totalPages}
-                                onPageChange={setCurrentPage}
+                                onPageChange={handlePageChange}
                             />
                         </>
                     )}
                 </section>
 
-
                 <Filters
-                    searchQuery={searchQuery}
+                    searchQuery={urlSearch}
                     onSearchChange={handleSearchChange}
                     filters={filters}
                     toggleCategory={toggleCategory}
@@ -111,10 +190,11 @@ function HomePage() {
                     categories={skills}
                     isOpen={isFiltersOpen}
                     onClose={handleCloseFilters}
+                    categoriesLoading={skillsLoading}
+                    categoriesError={skillsError}
                 />
             </div>
         </>
     )
 }
-
 export default HomePage

@@ -6,6 +6,11 @@
     padding: 24px;
     gap: 20px;
     flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .title {
@@ -20,4 +25,43 @@
     color: var(--Black-800, rgba(48, 48, 48, 1));
     font-size: 16px;
     font-weight: 500;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.answer img,
+.answer video,
+.answer iframe {
+    max-width: 100%;
+}
+
+.answer table {
+    max-width: 100%;
+    display: block;
+    overflow-x: auto;
+}
+
+.answer pre {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+.answer * {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.collapsed {
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.expandButton {
+    font-family: "Manrope", sans-serif;
+    color: var(--Purple-700);
 }

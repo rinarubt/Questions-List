@@ -14,34 +14,35 @@ export const getQuestions = async (params = {}, signal) => {
     return response.data
 }
 
+const fetchSkillsPage = (page, signal) =>
+    axios.get(`${BASE_URL}/skills`, { params: { page }, signal })
 
-export const getSkills = async () => {
-    try {
-        const firstResponse = await axios.get(`${BASE_URL}/skills`, {
-            params: { page: 1 }
-        })
+export const getSkills = async (signal) => {
+    const { data: firstPage } = await fetchSkillsPage(1, signal)
+    const pageSize = firstPage.per_page ?? firstPage.data.length
 
-        const firstData = firstResponse.data
-        const allSkills = [...firstData.data]
+    if (!pageSize) return firstPage
 
-        const totalPages = Math.ceil(
-            firstData.total / firstData.data.length
+    const totalPages = Math.ceil(firstPage.total / pageSize)
+    if (totalPages <= 1) return firstPage
+
+    const rest = await Promise.all(
+        Array.from({ length: totalPages - 1 }, (_, i) =>
+            fetchSkillsPage(i + 2, signal)
         )
+    )
 
-        for (let page = 2; page <= totalPages; page++) {
-            const response = await axios.get(`${BASE_URL}/skills`, {
-                params: { page }
-            })
-
-            allSkills.push(...response.data.data)
-        }
-
-        return {
-            ...firstData,
-            data: allSkills
-        }
-    } catch (error) {
-        console.error('Ошибка загрузки категорий:', error)
-        throw error
+    return {
+        ...firstPage,
+        data: firstPage.data.concat(...rest.map(r => r.data.data)),
     }
+}
+
+export const getQuestionById = async (id, signal) => {
+    const response = await axios.get(
+        `${BASE_URL}/questions/public-questions/${id}`,
+        { signal }
+    )
+
+    return response.data
 }

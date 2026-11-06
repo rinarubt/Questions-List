@@ -9,6 +9,8 @@ import { STATUS_OPTIONS } from "../../../../constants/constants";
 
 import Search from "../Search/Search";
 import FilterButton from "../FilterButton/FilterButton";
+import LoadingState from "../../../../components/LoadingState/LoadingState";
+import ErrorState from "../../../../components/ErrorState/ErrorState";
 
 import closeFiltersButton from "../../../../assets/closeFilters.svg";
 
@@ -19,6 +21,8 @@ function Filters({
     onSearchChange,
     filters,
     categories,
+    categoriesLoading,
+    categoriesError,
     toggleCategory,
     toggleRating,
     toggleComplexity,
@@ -49,16 +53,21 @@ function Filters({
 
             <div className={styles.filterButtons}>
                 <h4 className={styles.filterButtonsTitle}>Категории вопросов</h4>
-
                 <div className={styles.categoriesButtons}>
-                    {visibleCategories.map((cat) => (
-                        <FilterButton
-                            key={cat.id}
-                            label={cat.title}
-                            isActive={filters.category.includes(cat.id)}
-                            onClick={() => toggleCategory(cat.id)}
-                        />
-                    ))}
+                    {categoriesLoading ? (
+                        <LoadingState />
+                    ) : categoriesError ? (
+                        <ErrorState />
+                    ) : (
+                        visibleCategories.map((cat) => (
+                            <FilterButton
+                                key={cat.id}
+                                label={cat.title}
+                                isActive={filters.category.includes(cat.id)}
+                                onClick={() => toggleCategory(cat.id)}
+                            />
+                        ))
+                    )}
                 </div>
 
                 {safeCategories.length > VISIBLE_LIMIT && (

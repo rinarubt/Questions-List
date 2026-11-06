@@ -1,14 +1,10 @@
-import Layout from "../layout/Layout";
-import HomePage from "../pages/HomePage/HomePage";
-import QuestionDetailsPage from "../pages/QuestionDetailsPage/QuestionDetailsPage";
+import { RouterProvider } from "react-router-dom";
+import { router } from "../router";
 
 function App() {
   return (
     <>
-      <Layout>
-      <HomePage />
-      {/* <QuestionDetailsPage /> */}
-      </Layout>
+      <RouterProvider router={router} />
     </>
   )
 }

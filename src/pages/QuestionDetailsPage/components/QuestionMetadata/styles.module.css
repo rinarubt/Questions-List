@@ -39,11 +39,26 @@
 }
 
 .author {
+    margin: 0;
     color: var(--Black-800);
     font-size: 14px;
 }
 
 .authorDec {
     color: var(--Purple-700);
+}
+
+.closeFilters {
+    display: none
+}
+
+@media (max-width: 1024px) {
+    .questionMetadata {
+        border-radius: 0px;
+    }
+    .closeFilters {
+        display: flex;
+        justify-content: flex-end;
+    }
 }
 

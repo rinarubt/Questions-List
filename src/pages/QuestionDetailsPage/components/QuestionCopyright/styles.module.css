@@ -35,3 +35,10 @@
     display: flex;
     gap: 12px;
 }
+
+
+@media (max-width: 1024px) {
+    .questionCopyright {
+        display: none;
+    }
+}

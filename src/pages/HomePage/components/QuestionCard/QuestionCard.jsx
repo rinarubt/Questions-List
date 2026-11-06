@@ -1,13 +1,27 @@
+import { useRef, useState } from "react";
+import { useClickOutside } from '../../../../hooks/useClickOutside';
+
 import DOMPurify from "dompurify";
 
 import InfoBadge from "../../../../components/InfoBadge/InfoBadge";
+import QuestionActionsMenu from "../QuestionActionsMenu/QuestionActionsMenu";
+
 import accordeon from "../../../../assets/accordeon.svg";
 import action from "../../../../assets/action.svg";
 import styles from './styles.module.css'
 
 
 function QuestionCard({ question, isOpen, onToggle }) {
-    const { title, shortAnswer, rate, complexity } = question
+    const { id, title, shortAnswer, rate, complexity } = question
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+    const actionsRef = useRef(null)
+
+    useClickOutside(
+        actionsRef,
+        () => setIsMenuOpen(false),
+        isMenuOpen
+    )
 
     return (
         <div className={styles.card}>
@@ -33,10 +47,14 @@ function QuestionCard({ question, isOpen, onToggle }) {
                             <InfoBadge label={'Сложность:'} value={complexity} />
                         </div>
 
-                        <button className={styles.actionsButton}>
-                            <img src={action} alt="" />
-                        </button>
+                        <div className={styles.actionsWrapper} ref={actionsRef}>
+                            <button className={styles.actionsButton} onClick={() => setIsMenuOpen(prev => !prev)}>
+                                <img src={action} alt="" />
+                            </button>
+                            {isMenuOpen && <QuestionActionsMenu questionId={id} />}
+                        </div>
                     </div>
+
 
                     <div
                         dangerouslySetInnerHTML={{

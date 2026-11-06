@@ -1,24 +1,13 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { toggleValue } from "../../../../utils/toggleValue";
 
 import QuestionCard from "../QuestionCard/QuestionCard";
+
 import filtersButton from "../../../../assets/filtersButton.svg";
 import styles from './styles.module.css';
 
 function QuestionCardList({ questions, onOpenFilters }) {
     const [openIds, setOpenIds] = useState([])
-
-    const openSet = new Set(openIds)
-
-    useEffect(() => {
-        const currentIds = new Set(
-            (questions ?? []).map(question => question.id)
-        )
-
-        setOpenIds(prev =>
-            prev.filter(id => currentIds.has(id))
-        )
-    }, [questions])
 
     const toggleCard = useCallback((id) => {
         setOpenIds(prev => toggleValue(prev, id))
@@ -41,7 +30,7 @@ function QuestionCardList({ questions, onOpenFilters }) {
                 <QuestionCard
                     key={question.id}
                     question={question}
-                    isOpen={openSet.has(question.id)}
+                    isOpen={openIds.includes(question.id)}
                     onToggle={() => toggleCard(question.id)}
                 />
             ))}

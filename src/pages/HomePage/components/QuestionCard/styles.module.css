@@ -42,20 +42,12 @@
     transform: rotate(180deg);
 }
 
-
 .cardContent {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.3s ease;
-}
-
-.cardContent>div {
-    min-height: 0;
-    overflow: hidden;
+    display: none;
 }
 
 .show {
-    grid-template-rows: 1fr;
+    display: block;
     margin-top: 24px;
 }
 
@@ -67,4 +59,12 @@
 .cardFiltersInner {
     display: flex;
     gap: 40px;
+}
+
+.actionsWrapper {
+    position: relative;
+}
+
+.actionsButton {
+    padding: 10px;
 }

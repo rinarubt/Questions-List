@@ -48,3 +48,8 @@
 }
 
 
+@media (max-width: 1024px) {
+    .questionProgress {
+        display: none;
+    }
+}
